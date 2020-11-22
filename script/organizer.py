@@ -27,11 +27,10 @@ def importaArquivos():
     javaScript = ['.js']
     php = ['.php']
 
-    for pastaAtual, subPastas, arquivos  in os.walk(os.path.abspath('.')):
+    for pastaAtual, subPastas, arquivos  in os.walk(os.path.abspath(os.getcwd())):
         for arquivo in arquivos:
             nome, extensao = os.path.splitext(arquivo)
-            if(nome!='organizer'):
-                print(arquivo)
+            if(nome!='organizer' or nome!='organizar'):
                 if(extensao in txt):
                     criaMove(arquivo, './txt')
                 elif(extensao in word):
