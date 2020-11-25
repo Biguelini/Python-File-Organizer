@@ -6,7 +6,34 @@ def criaMove(arquivo, diretorio):
         pass
     else:
         os.mkdir(diretorio)
-    shutil.move(arquivo, diretorio)
+    os.chdir(diretorio)
+    if(os.path.isfile(arquivo)):
+        nome, extensao = os.path.splitext(arquivo)
+        novo_nome = nome + "_"+extensao
+        if(os.path.isfile(novo_nome)):
+            nome, extensao = os.path.splitext(novo_nome)
+            novo_nome = nome + "_"+extensao
+            if(os.path.isfile(novo_nome)):
+                nome, extensao = os.path.splitext(novo_nome)
+                novo_nome = nome + "_"+extensao
+                if(os.path.isfile(novo_nome)):    
+                    nome, extensao = os.path.splitext(novo_nome)
+                    novo_nome = nome + "_"+extensao
+                    if(os.path.isfile(novo_nome)):
+                        nome, extensao = os.path.splitext(novo_nome)
+                        novo_nome = nome + "_"+extensao
+                        if(os.path.isfile(novo_nome)):
+                            nome, extensao = os.path.splitext(novo_nome)
+                            novo_nome = nome + "_"+extensao
+                            if(os.path.isfile(novo_nome)):    
+                                nome, extensao = os.path.splitext(novo_nome)
+                                novo_nome = nome + "_"+extensao
+        print(f'Seu arquivo {arquivo} foi renomeado {novo_nome}')
+        os.chdir('../')
+        os.rename(arquivo, novo_nome)
+        shutil.move(novo_nome, diretorio)
+    else:
+        shutil.move(arquivo, diretorio)
 
 def importaArquivos():
     txt = ['.txt']
@@ -27,44 +54,46 @@ def importaArquivos():
     javaScript = ['.js']
     php = ['.php']
 
-    for pastaAtual, subPastas, arquivos  in os.walk(os.path.abspath(os.getcwd())):
-        for arquivo in arquivos:
-            nome, extensao = os.path.splitext(arquivo)
-            if(nome!='organizer' or nome!='organizar'):
+
+    # for arquivos  in os.walk(os.listdir(os.getcwd())):
+    for arquivos  in os.listdir(os.path.abspath(os.getcwd())):
+        if(os.path.isfile(arquivos)):
+            nome, extensao = os.path.splitext(arquivos)
+            if(arquivos!="organizer.py"):
                 if(extensao in txt):
-                    criaMove(arquivo, './txt')
+                    criaMove(arquivos, './txt')
                 elif(extensao in word):
-                    criaMove(arquivo, './word')
+                    criaMove(arquivos, './word')
                 elif(extensao in powerpoint):
-                    criaMove(arquivo, './powerpoint')   
+                    criaMove(arquivos, './powerpoint')   
                 elif(extensao in excell):
-                    criaMove(arquivo, './excell')
+                    criaMove(arquivos, './excell')
                 elif(extensao in imagens):
-                    criaMove(arquivo, './imagens')
+                    criaMove(arquivos, './imagens')
                 elif(extensao in design):
-                    criaMove(arquivo, './design')
+                    criaMove(arquivos, './design')
                 elif(extensao in video):
-                    criaMove(arquivo, './video')
+                    criaMove(arquivos, './video')
                 elif(extensao in audio):
-                    criaMove(arquivo, './audio')
+                    criaMove(arquivos, './audio')
                 elif(extensao in compactados):
-                    criaMove(arquivo, './compactados')
+                    criaMove(arquivos, './compactados')
                 elif(extensao in pdf):
-                    criaMove(arquivo, './pdf')
+                    criaMove(arquivos, './pdf')
                 elif(extensao in executaveis):
-                    criaMove(arquivo, './executaveis')
+                    criaMove(arquivos, './executaveis')
                 elif(extensao in html):
-                    criaMove(arquivo, './html')
+                    criaMove(arquivos, './html')
                 elif(extensao in bd):
-                    criaMove(arquivo, './bd')
+                    criaMove(arquivos, './bd')
                 elif(extensao in python):
-                    criaMove(arquivo, './python')
+                    criaMove(arquivos, './python')
                 elif(extensao in css):
-                    criaMove(arquivo, './css')
+                    criaMove(arquivos, './css')
                 elif(extensao in javaScript):
-                    criaMove(arquivo, './javaScript')
+                    criaMove(arquivos, './javaScript')
                 elif(extensao in php):
-                    criaMove(arquivo, './php')
+                    criaMove(arquivos, './php')
                 else:
-                    criaMove(arquivo, './outros')
+                    criaMove(arquivos, './outros')
 importaArquivos()
