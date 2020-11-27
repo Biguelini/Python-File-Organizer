@@ -1,5 +1,5 @@
 import os
-import shutil
+from shutil import move
 
 def criaMove(arquivo, diretorio):
     if os.path.isdir(diretorio):
@@ -31,9 +31,10 @@ def criaMove(arquivo, diretorio):
         print(f'Seu arquivo {arquivo} foi renomeado {novo_nome}')
         os.chdir('../')
         os.rename(arquivo, novo_nome)
-        shutil.move(novo_nome, diretorio)
+        arquivo=novo_nome
     else:
-        shutil.move(arquivo, diretorio)
+	    os.chdir('../')
+    move(arquivo, diretorio)
 
 def importaArquivos():
     txt = ['.txt']
@@ -55,7 +56,6 @@ def importaArquivos():
     php = ['.php']
 
 
-    # for arquivos  in os.walk(os.listdir(os.getcwd())):
     for arquivos  in os.listdir(os.path.abspath(os.getcwd())):
         if(os.path.isfile(arquivos)):
             nome, extensao = os.path.splitext(arquivos)
