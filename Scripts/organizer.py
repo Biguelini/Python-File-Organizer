@@ -1,42 +1,32 @@
-import os
+from os import chdir, mkdir, path, rename, listdir, getcwd
 from shutil import move
+from contextlib import suppress
 
-def criaMove(arquivo, diretorio):
-    if os.path.isdir(diretorio):
-        pass
+
+def cria_move(arquivo, diretorio):
+    with suppress(FileExistsError):
+        mkdir(diretorio)
+    chdir(diretorio)
+    if(path.isfile(arquivo)):
+        nome, extensao = path.splitext(arquivo)
+        novo_nome = nome+"_"+extensao
+        novo_nome_exist = True
+        while(novo_nome_exist):
+            if(path.isfile(novo_nome)):
+                nome, extensao = path.splitext(novo_nome)
+                novo_nome = nome+"_"+extensao
+            else:
+                novo_nome_exist = False
+        print(f"Seu arquivo {arquivo} foi renomeado para {novo_nome}")
+        chdir("../")
+        rename(arquivo, novo_nome)
+        arquivo = novo_nome
     else:
-        os.mkdir(diretorio)
-    os.chdir(diretorio)
-    if(os.path.isfile(arquivo)):
-        nome, extensao = os.path.splitext(arquivo)
-        novo_nome = nome + "_"+extensao
-        if(os.path.isfile(novo_nome)):
-            nome, extensao = os.path.splitext(novo_nome)
-            novo_nome = nome + "_"+extensao
-            if(os.path.isfile(novo_nome)):
-                nome, extensao = os.path.splitext(novo_nome)
-                novo_nome = nome + "_"+extensao
-                if(os.path.isfile(novo_nome)):    
-                    nome, extensao = os.path.splitext(novo_nome)
-                    novo_nome = nome + "_"+extensao
-                    if(os.path.isfile(novo_nome)):
-                        nome, extensao = os.path.splitext(novo_nome)
-                        novo_nome = nome + "_"+extensao
-                        if(os.path.isfile(novo_nome)):
-                            nome, extensao = os.path.splitext(novo_nome)
-                            novo_nome = nome + "_"+extensao
-                            if(os.path.isfile(novo_nome)):    
-                                nome, extensao = os.path.splitext(novo_nome)
-                                novo_nome = nome + "_"+extensao
-        print(f'Seu arquivo {arquivo} foi renomeado {novo_nome}')
-        os.chdir('../')
-        os.rename(arquivo, novo_nome)
-        arquivo=novo_nome
-    else:
-	    os.chdir('../')
+        chdir("../")
     move(arquivo, diretorio)
 
-def importaArquivos():
+
+def importa_arquivos():
     txt = ['.txt']
     word = ['.docx', '.doc', '.rtf', '.odt']
     powerpoint = ['.pptx', '.ppt']
@@ -55,45 +45,46 @@ def importaArquivos():
     javaScript = ['.js']
     php = ['.php']
 
-
-    for arquivos  in os.listdir(os.path.abspath(os.getcwd())):
-        if(os.path.isfile(arquivos)):
-            nome, extensao = os.path.splitext(arquivos)
-            if(arquivos!="organizer.py"):
+    for arquivo in listdir(path.abspath(getcwd())):
+        if(path.isfile(arquivo)):
+            nome, extensao = path.splitext(arquivo)
+            if(arquivo != "organizer.py" or arquivo != "organizar.bat"):
                 if(extensao in txt):
-                    criaMove(arquivos, './txt')
+                    cria_move(arquivo, './txt')
                 elif(extensao in word):
-                    criaMove(arquivos, './word')
+                    cria_move(arquivo, './word')
                 elif(extensao in powerpoint):
-                    criaMove(arquivos, './powerpoint')   
+                    cria_move(arquivo, './powerpoint')
                 elif(extensao in excell):
-                    criaMove(arquivos, './excell')
+                    cria_move(arquivo, './excell')
                 elif(extensao in imagens):
-                    criaMove(arquivos, './imagens')
+                    cria_move(arquivo, './imagens')
                 elif(extensao in design):
-                    criaMove(arquivos, './design')
+                    cria_move(arquivo, './design')
                 elif(extensao in video):
-                    criaMove(arquivos, './video')
+                    cria_move(arquivo, './video')
                 elif(extensao in audio):
-                    criaMove(arquivos, './audio')
+                    cria_move(arquivo, './audio')
                 elif(extensao in compactados):
-                    criaMove(arquivos, './compactados')
+                    cria_move(arquivo, './compactados')
                 elif(extensao in pdf):
-                    criaMove(arquivos, './pdf')
+                    cria_move(arquivo, './pdf')
                 elif(extensao in executaveis):
-                    criaMove(arquivos, './executaveis')
+                    cria_move(arquivo, './executaveis')
                 elif(extensao in html):
-                    criaMove(arquivos, './html')
+                    cria_move(arquivo, './html')
                 elif(extensao in bd):
-                    criaMove(arquivos, './bd')
+                    cria_move(arquivo, './bd')
                 elif(extensao in python):
-                    criaMove(arquivos, './python')
+                    cria_move(arquivo, './python')
                 elif(extensao in css):
-                    criaMove(arquivos, './css')
+                    cria_move(arquivo, './css')
                 elif(extensao in javaScript):
-                    criaMove(arquivos, './javaScript')
+                    cria_move(arquivo, './javaScript')
                 elif(extensao in php):
-                    criaMove(arquivos, './php')
+                    cria_move(arquivo, './php')
                 else:
-                    criaMove(arquivos, './outros')
-importaArquivos()
+                    cria_move(arquivo, './outros')
+
+
+importa_arquivos()
