@@ -1,6 +1,6 @@
 # Python File Organizer
 
-## Ídice :memo:
+## Índice :memo:
 #### ✏️ [Sobre](https://github.com/Biguelini/Python-File-Organizer#sobre)
 #### 🚀 [Objetivos](https://github.com/Biguelini/Python-File-Organizer#objetivos)
 #### 💻	[Tecnologias](https://github.com/Biguelini/Python-File-Organizer#tecnologias)
