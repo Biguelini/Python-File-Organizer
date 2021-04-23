@@ -38,12 +38,8 @@ def importa_arquivos():
     compactados = ['.zip', '.rar', '.7z']
     pdf = ['.pdf']
     executaveis = ['.exe', '.msi']
-    html = ['.htm', '.html']
-    bd = ['.sql', '.xml']
-    python = ['.py']
-    css = ['.css']
-    javaScript = ['.js']
-    php = ['.php']
+    dev = ['.cpp', '.php', '.js', '.css', '.py', '.sql', '.xml', '.htm',
+           '.html', '.cpp', '.java', '.c', '.dart', '.cs', '.vb', '.xhtml']
 
     for arquivo in listdir(path.abspath(getcwd())):
         if(path.isfile(arquivo)):
@@ -71,18 +67,8 @@ def importa_arquivos():
                     cria_move(arquivo, './pdf')
                 elif(extensao in executaveis):
                     cria_move(arquivo, './executaveis')
-                elif(extensao in html):
-                    cria_move(arquivo, './html')
-                elif(extensao in bd):
-                    cria_move(arquivo, './bd')
-                elif(extensao in python):
-                    cria_move(arquivo, './python')
-                elif(extensao in css):
-                    cria_move(arquivo, './css')
-                elif(extensao in javaScript):
-                    cria_move(arquivo, './javaScript')
-                elif(extensao in php):
-                    cria_move(arquivo, './php')
+                elif(extensao in dev):
+                    cria_move(arquivo, './dev')
                 else:
                     cria_move(arquivo, './outros')
 
